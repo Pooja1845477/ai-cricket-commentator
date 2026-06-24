@@ -7,15 +7,19 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import MatchSetup from "./pages/MatchSetup";
 import MatchPlay from "./pages/MatchPlay";
+import MatchHistory from "./pages/MatchHistory";
+import MatchDetails from "./pages/MatchDetails";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"\t/"} component={Home} />
-      <Route path={"/setup"} component={MatchSetup} />
-      <Route path={"/match/:matchId"} component={MatchPlay} />
-      <Route path={"/404"} component={NotFound} />
+      <Route path="/" component={Home} />
+      <Route path="/setup" component={MatchSetup} />
+      <Route path="/match/:matchId" component={MatchPlay} />
+      <Route path="/history" component={MatchHistory} />
+      <Route path="/match/:matchId/details" component={MatchDetails} />
+      <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
@@ -31,7 +35,7 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider
-        defaultTheme="light"
+        defaultTheme="dark"
         // switchable
       >
         <TooltipProvider>

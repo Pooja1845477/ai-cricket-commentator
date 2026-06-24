@@ -22,11 +22,11 @@
 - [ ] Add animations for key events (boundaries, wickets)
 
 ## Phase 4: Scorecards & Match History
-- [ ] Build batting scorecard with player statistics
-- [ ] Build bowling scorecard with player statistics
-- [ ] Create match history page with past matches list
-- [ ] Implement match replay functionality with commentary logs
-- [ ] Add database persistence for match history
+- [x] Build batting scorecard with player statistics
+- [x] Build bowling scorecard with player statistics
+- [ ] Create match history page with past matches list (TODO: wire real API)
+- [ ] Implement match replay functionality with commentary logs (TODO: wire real API)
+- [ ] Add database persistence for match history (TODO: verify end-to-end)
 
 ## Phase 5: Polish & Refinement
 - [ ] Implement responsive design for mobile/tablet/desktop
