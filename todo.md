@@ -29,8 +29,8 @@
 - [x] Add database persistence for match history (verified end-to-end)
 
 ## Phase 5: Polish & Refinement
-- [ ] Implement responsive design for mobile/tablet/desktop
-- [ ] Add smooth animations and transitions
-- [ ] Refine dark theme with cricket-inspired design elements
-- [ ] Test all features end-to-end
-- [ ] Performance optimization and final touches
+- [x] Implement responsive design for mobile/tablet/desktop
+- [x] Add smooth animations and transitions
+- [x] Refine dark theme with cricket-inspired design elements
+- [x] Test all features end-to-end
+- [x] Performance optimization and final touches
