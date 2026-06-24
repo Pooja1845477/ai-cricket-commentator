@@ -17,8 +17,8 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/setup" component={MatchSetup} />
       <Route path="/match/:matchId" component={MatchPlay} />
+      <Route path="/match/:matchId/replay" component={MatchDetails} />
       <Route path="/history" component={MatchHistory} />
-      <Route path="/match/:matchId/details" component={MatchDetails} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

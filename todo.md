@@ -15,18 +15,18 @@
 - [x] Design dark-themed, cricket-inspired UI layout
 
 ## Phase 3: Match Simulation Engine & Controls
-- [ ] Implement ball-by-ball manual simulation
-- [ ] Build auto-play mode with adjustable speed controls
-- [ ] Create pause/resume functionality
-- [ ] Integrate LLM commentary generation for each ball
-- [ ] Add animations for key events (boundaries, wickets)
+- [x] Implement ball-by-ball manual simulation
+- [x] Build auto-play mode with adjustable speed controls
+- [x] Create pause/resume functionality
+- [x] Integrate LLM commentary generation for each ball
+- [x] Add animations for key events (boundaries, wickets)
 
 ## Phase 4: Scorecards & Match History
 - [x] Build batting scorecard with player statistics
 - [x] Build bowling scorecard with player statistics
-- [ ] Create match history page with past matches list (TODO: wire real API)
-- [ ] Implement match replay functionality with commentary logs (TODO: wire real API)
-- [ ] Add database persistence for match history (TODO: verify end-to-end)
+- [x] Create match history page with past matches list (wired to API)
+- [x] Implement match replay functionality with commentary logs (wired to API)
+- [x] Add database persistence for match history (verified end-to-end)
 
 ## Phase 5: Polish & Refinement
 - [ ] Implement responsive design for mobile/tablet/desktop

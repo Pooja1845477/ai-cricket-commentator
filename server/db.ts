@@ -112,6 +112,14 @@ export async function createPlayer(teamId: number, name: string, role: string, j
   return result;
 }
 
+export async function getPlayer(playerId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.select().from(players).where(eq(players.id, playerId)).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
 export async function getTeamPlayers(teamId: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");

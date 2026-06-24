@@ -1,9 +1,9 @@
-import { z } from "zod";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { invokeLLM } from "./_core/llm";
+import { z } from "zod";
 import * as db from "./db";
 import * as cricket from "./cricket";
 
@@ -149,9 +149,11 @@ export const appRouter = router({
         // Simulate ball outcome
         const outcome = cricket.simulateBallOutcome();
         
-        // Get player names for commentary (simplified for now)
-        const batsmanName = `Batsman ${input.batsmanId}`;
-        const bowlerName = `Bowler ${input.bowlerId}`;
+        // Get player names for commentary
+        const batsman = await db.getPlayer(input.batsmanId);
+        const bowler = await db.getPlayer(input.bowlerId);
+        const batsmanName = batsman?.name || `Batsman ${input.batsmanId}`;
+        const bowlerName = bowler?.name || `Bowler ${input.bowlerId}`;
         
         // Generate AI commentary
         const commentaryPrompt = cricket.getCommentaryPrompt(

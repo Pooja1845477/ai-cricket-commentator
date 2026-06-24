@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRoute } from 'wouter';
+import { trpc } from '@/lib/trpc';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -28,21 +29,48 @@ interface MatchDetailsData {
 }
 
 export default function MatchDetails() {
-  const [match, params] = useRoute<{ matchId: string }>('/match/:matchId/details');
+  const [match, params] = useRoute<{ matchId: string }>('/match/:matchId/replay');
   const [matchData, setMatchData] = useState<MatchDetailsData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (match && params?.matchId) {
-      // TODO: Fetch match details from API
-      // For now, show loading state
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
-  }, [match]);
+  const replayQuery = trpc.history.getReplay.useQuery(
+    { matchId: params?.matchId ? parseInt(params.matchId) : 0 },
+    { enabled: !!params?.matchId }
+  );
 
-  if (!match) return null;
+  useEffect(() => {
+    if (replayQuery.data) {
+      const match = replayQuery.data.match as any;
+      const formattedData: MatchDetailsData = {
+        id: match.id,
+        team1: match.team1Name || 'Team 1',
+        team2: match.team2Name || 'Team 2',
+        format: match.format,
+        winner: match.winner || 'TBD',
+        team1BattingStats: [],
+        team2BattingStats: [],
+        team1BowlingStats: [],
+        team2BowlingStats: [],
+        commentary: replayQuery.data.commentary.map((c: any) => ({
+          id: c.id,
+          ballNumber: c.ballNumber,
+          over: c.over,
+          eventType: c.outcome,
+          commentary: c.commentary,
+          timestamp: new Date(c.createdAt).getTime(),
+        })),
+        team1Runs: match.team1Runs || 0,
+        team1Wickets: match.team1Wickets || 0,
+        team2Runs: match.team2Runs || 0,
+        team2Wickets: match.team2Wickets || 0,
+        totalOvers: match.overs?.toString() || '0',
+      };
+      setMatchData(formattedData);
+    }
+    setLoading(replayQuery.isLoading);
+  }, [replayQuery.data, replayQuery.isLoading]);
+
+  if (!match || !params?.matchId) return null;
 
   if (loading) {
     return (

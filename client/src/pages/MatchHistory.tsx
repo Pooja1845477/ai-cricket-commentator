@@ -24,13 +24,26 @@ interface MatchHistoryItem {
 export default function MatchHistory() {
   const [, navigate] = useLocation();
   const [matches, setMatches] = useState<MatchHistoryItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const historyQuery = trpc.history.list.useQuery();
 
   useEffect(() => {
-    // TODO: Fetch match history from API
-    // For now, show empty state
-    setIsLoading(false);
-  }, []);
+    if (historyQuery.data) {
+      const formattedMatches = historyQuery.data.map((match: any) => ({
+        id: match.id,
+        team1: match.team1Name,
+        team2: match.team2Name,
+        team1Runs: match.team1Runs || 0,
+        team1Wickets: match.team1Wickets || 0,
+        team2Runs: match.team2Runs || 0,
+        team2Wickets: match.team2Wickets || 0,
+        format: match.format,
+        winner: match.winner || 'TBD',
+        createdAt: new Date(match.createdAt),
+      }));
+      setMatches(formattedMatches);
+    }
+  }, [historyQuery.data]);
 
   const handleReplayMatch = (matchId: number) => {
     navigate(`/match/${matchId}/replay`);
@@ -49,7 +62,7 @@ export default function MatchHistory() {
           </p>
         </div>
 
-        {isLoading ? (
+        {historyQuery.isLoading ? (
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
               <Skeleton key={i} className="h-32 bg-card/50" />
