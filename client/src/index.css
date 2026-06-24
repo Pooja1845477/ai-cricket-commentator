@@ -44,11 +44,12 @@
 }
 
 * {
-  @apply border-border;
+  border-color: rgb(var(--border) / 1);
 }
 
 body {
-  @apply bg-background text-foreground;
+  background-color: rgb(var(--background) / 1);
+  color: rgb(var(--foreground) / 1);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -78,15 +79,16 @@ body {
 
 /* Premium card with glassmorphism */
 .premium-card {
-  @apply bg-card border border-border/30 rounded-2xl shadow-2xl;
   background: linear-gradient(135deg, rgba(20, 26, 40, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .premium-card:hover {
-  @apply shadow-2xl;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   border-color: rgba(74, 222, 128, 0.3);
   background: linear-gradient(135deg, rgba(20, 26, 40, 0.9) 0%, rgba(31, 41, 55, 0.7) 100%);
   transform: translateY(-2px);
@@ -103,7 +105,7 @@ body {
 
 /* Accent glow */
 .accent-glow {
-  @apply text-accent;
+  color: rgb(var(--accent) / 1);
   text-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
 }
 
@@ -186,15 +188,6 @@ body {
   }
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
 /* Animation utilities */
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out;
@@ -226,56 +219,130 @@ body {
 
 /* ===== SMOOTH TRANSITIONS ===== */
 button, a, input, select, textarea {
-  @apply transition-all duration-200 ease-out;
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 button:active {
-  @apply transform scale-95;
+  transform: scale(0.95);
 }
 
 /* ===== CONTAINER & LAYOUT ===== */
 .container {
-  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 80rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .flex {
-  @apply flex min-w-0 min-h-0;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
 }
 
 /* ===== TYPOGRAPHY ===== */
 h1 {
-  @apply text-4xl sm:text-5xl font-bold tracking-tight;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 640px) {
+  h1 {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
 }
 
 h2 {
-  @apply text-3xl sm:text-4xl font-bold tracking-tight;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 640px) {
+  h2 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
 }
 
 h3 {
-  @apply text-2xl sm:text-3xl font-bold tracking-tight;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 640px) {
+  h3 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
 }
 
 p {
-  @apply text-base leading-relaxed;
+  font-size: 1rem;
+  line-height: 1.625;
 }
 
 /* ===== PREMIUM BUTTONS ===== */
 .btn-premium {
-  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition-property: all;
+  transition-duration: 200ms;
   background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-  @apply text-background hover:shadow-lg hover:shadow-accent/50;
-  @apply active:scale-95;
+  color: rgb(10, 14, 23);
 }
 
 .btn-premium:hover {
   box-shadow: 0 0 30px rgba(74, 222, 128, 0.4);
 }
 
+.btn-premium:active {
+  transform: scale(0.95);
+}
+
 /* ===== PREMIUM INPUTS ===== */
 input, select, textarea {
-  @apply bg-input border border-border/50 rounded-lg px-4 py-2 text-foreground;
-  @apply placeholder-muted-foreground focus:border-accent focus:ring-2 focus:ring-accent/20;
-  @apply transition-all duration-200;
+  background-color: rgb(31, 41, 55);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: rgb(var(--foreground) / 1);
+  transition-property: all;
+  transition-duration: 200ms;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgb(107, 114, 128);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: rgb(74, 222, 128);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
 }
 
 /* ===== SCROLLBAR STYLING ===== */
@@ -300,15 +367,18 @@ input, select, textarea {
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 640px) {
   h1 {
-    @apply text-3xl;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
   
   h2 {
-    @apply text-2xl;
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
   
   .container {
-    @apply px-3;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 }
 
