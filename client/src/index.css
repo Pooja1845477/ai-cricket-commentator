@@ -1,147 +1,322 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-    font-feature-settings: "rounding" 1;
-  }
-  
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 80rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  .flex {
-    display: flex;
-    min-width: 0;
-    min-height: 0;
-  }
-  
-  /* Cricket-themed animations */
-  @keyframes boundary-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
-  
-  @keyframes wicket-shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-  }
-  
-  @keyframes six-float {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-30px) scale(1.1); opacity: 0; }
-  }
-  
-  .boundary-pulse {
-    animation: boundary-pulse 0.6s ease-in-out;
-  }
-  
-  .wicket-shake {
-    animation: wicket-shake 0.5s ease-in-out;
-  }
-  
-  .six-float {
-    animation: six-float 1s ease-out forwards;
-  }
-  
-  .cricket-field-bg {
-    background-color: hsl(var(--background));
-    background-image: 
-      linear-gradient(to bottom, hsl(var(--background)), hsl(var(--background))),
-      radial-gradient(circle at 20% 50%, rgba(74, 222, 128, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(74, 222, 128, 0.03) 0%, transparent 50%);
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
+/* ===== PREMIUM DARK THEME ===== */
 :root {
-  color-scheme: dark;
-  
-  /* Dark cricket-themed color palette */
-  --background: 10 15% 8%;
-  --foreground: 0 0% 95%;
-  
-  --card: 10 15% 12%;
-  --card-foreground: 0 0% 95%;
-  
-  --popover: 10 15% 12%;
-  --popover-foreground: 0 0% 95%;
-  
-  --muted: 0 0% 45%;
-  --muted-foreground: 0 0% 75%;
-  
-  --accent: 142 71% 45%; /* Vibrant green for cricket field */
-  --accent-foreground: 0 0% 10%;
-  
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 10%;
-  
-  --border: 10 15% 20%;
-  --input: 10 15% 15%;
-  --ring: 142 71% 45%;
-  
-  --radius: 0.75rem;
+  --background: 10 14 23;
+  --foreground: 255 255 255;
+  --card: 20 26 40;
+  --card-foreground: 255 255 255;
+  --primary: 74 222 128;
+  --primary-foreground: 10 14 23;
+  --secondary: 139 92 246;
+  --secondary-foreground: 255 255 255;
+  --accent: 74 222 128;
+  --accent-foreground: 10 14 23;
+  --muted: 107 114 128;
+  --muted-foreground: 209 213 219;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --border: 55 65 81;
+  --input: 31 41 55;
+  --ring: 74 222 128;
 }
 
 .dark {
-  --background: 10 15% 8%;
-  --foreground: 0 0% 95%;
-  
-  --card: 10 15% 12%;
-  --card-foreground: 0 0% 95%;
-  
-  --popover: 10 15% 12%;
-  --popover-foreground: 0 0% 95%;
-  
-  --muted: 0 0% 45%;
-  --muted-foreground: 0 0% 75%;
-  
-  --accent: 142 71% 45%;
-  --accent-foreground: 0 0% 10%;
-  
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 10%;
-  
-  --border: 10 15% 20%;
-  --input: 10 15% 15%;
-  --ring: 142 71% 45%;
+  --background: 10 14 23;
+  --foreground: 255 255 255;
+  --card: 20 26 40;
+  --card-foreground: 255 255 255;
+  --primary: 74 222 128;
+  --primary-foreground: 10 14 23;
+  --secondary: 139 92 246;
+  --secondary-foreground: 255 255 255;
+  --accent: 74 222 128;
+  --accent-foreground: 10 14 23;
+  --muted: 107 114 128;
+  --muted-foreground: 209 213 219;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --border: 55 65 81;
+  --input: 31 41 55;
+  --ring: 74 222 128;
 }
 
-.light {
-  --background: 0 0% 100%;
-  --foreground: 0 0% 3.6%;
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== PREMIUM GRADIENTS & EFFECTS ===== */
+.cricket-field-bg {
+  background: linear-gradient(135deg, rgb(10, 14, 23) 0%, rgb(20, 26, 40) 50%, rgb(10, 14, 23) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.cricket-field-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(74, 222, 128, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Premium card with glassmorphism */
+.premium-card {
+  @apply bg-card border border-border/30 rounded-2xl shadow-2xl;
+  background: linear-gradient(135deg, rgba(20, 26, 40, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.premium-card:hover {
+  @apply shadow-2xl;
+  border-color: rgba(74, 222, 128, 0.3);
+  background: linear-gradient(135deg, rgba(20, 26, 40, 0.9) 0%, rgba(31, 41, 55, 0.7) 100%);
+  transform: translateY(-2px);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #4ade80 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Accent glow */
+.accent-glow {
+  @apply text-accent;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+/* ===== PREMIUM ANIMATIONS ===== */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(74, 222, 128, 0.3), 0 0 40px rgba(74, 222, 128, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(74, 222, 128, 0.5), 0 0 60px rgba(74, 222, 128, 0.2);
+  }
+}
+
+@keyframes boundary-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(74, 222, 128, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+  }
+}
+
+@keyframes wicket-shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-5px) rotate(-1deg); }
+  50% { transform: translateX(5px) rotate(1deg); }
+  75% { transform: translateX(-5px) rotate(-1deg); }
+}
+
+@keyframes six-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-30px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(1.2);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Animation utilities */
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-boundary-pulse {
+  animation: boundary-pulse 0.6s ease-out;
+}
+
+.animate-wicket-shake {
+  animation: wicket-shake 0.5s ease-in-out;
+}
+
+.animate-six-float {
+  animation: six-float 1.5s ease-out forwards;
+}
+
+/* ===== SMOOTH TRANSITIONS ===== */
+button, a, input, select, textarea {
+  @apply transition-all duration-200 ease-out;
+}
+
+button:active {
+  @apply transform scale-95;
+}
+
+/* ===== CONTAINER & LAYOUT ===== */
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+}
+
+.flex {
+  @apply flex min-w-0 min-h-0;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1 {
+  @apply text-4xl sm:text-5xl font-bold tracking-tight;
+}
+
+h2 {
+  @apply text-3xl sm:text-4xl font-bold tracking-tight;
+}
+
+h3 {
+  @apply text-2xl sm:text-3xl font-bold tracking-tight;
+}
+
+p {
+  @apply text-base leading-relaxed;
+}
+
+/* ===== PREMIUM BUTTONS ===== */
+.btn-premium {
+  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  @apply text-background hover:shadow-lg hover:shadow-accent/50;
+  @apply active:scale-95;
+}
+
+.btn-premium:hover {
+  box-shadow: 0 0 30px rgba(74, 222, 128, 0.4);
+}
+
+/* ===== PREMIUM INPUTS ===== */
+input, select, textarea {
+  @apply bg-input border border-border/50 rounded-lg px-4 py-2 text-foreground;
+  @apply placeholder-muted-foreground focus:border-accent focus:ring-2 focus:ring-accent/20;
+  @apply transition-all duration-200;
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(20, 26, 40);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(55, 65, 81);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(74, 222, 128);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 640px) {
+  h1 {
+    @apply text-3xl;
+  }
   
-  --card: 0 0% 96.3%;
-  --card-foreground: 0 0% 3.6%;
+  h2 {
+    @apply text-2xl;
+  }
   
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 3.6%;
-  
-  --muted: 0 0% 89.8%;
-  --muted-foreground: 0 0% 39.2%;
-  
-  --accent: 142 71% 45%;
-  --accent-foreground: 0 0% 100%;
-  
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 100%;
-  
-  --border: 0 0% 89.8%;
-  --input: 0 0% 89.8%;
-  --ring: 142 71% 45%;
+  .container {
+    @apply px-3;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
