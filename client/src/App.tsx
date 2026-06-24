@@ -5,12 +5,16 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import MatchSetup from "./pages/MatchSetup";
+import MatchPlay from "./pages/MatchPlay";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"\t/"} component={Home} />
+      <Route path={"/setup"} component={MatchSetup} />
+      <Route path={"/match/:matchId"} component={MatchPlay} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
